@@ -4,7 +4,6 @@ import { ThreeDots } from 'react-loader-spinner';
 
 import { signUp } from '../../services/authApi';
 import Title from '../../styles/authPage/Title';
-import Button from '../../styles/Button';
 import AuthScreen from '../../styles/authPage/AuthScreens';
 
 export default function SignUp() {
@@ -30,26 +29,28 @@ export default function SignUp() {
     } else {
       setLoading(false);
 
-      const userInfo = {
-        email: userEmail,
-        name: userName,
-        password: userPassword
-      };
+      // const userInfo = {
+      //   email: userEmail,
+      //   name: userName,
+      //   password: userPassword
+      // };
 
-      signUp(userInfo).then(() => {navigate('/', {});});
-      signUp(userInfo).catch(() => {
-        alert('Falha ao fazer cadastro, favor rever seus dados.');
-        setLoading(true);
-      });
+      // signUp(userInfo).then(() => {navigate('/', {});});
+      // signUp(userInfo).catch(() => {
+      //   alert('Falha ao fazer cadastro, favor rever seus dados.');
+      //   setLoading(true);
+      // });
+
+      console.log('Cadastro feito com sucesso!');
+      navigate('/', userEmail);
     }
   }
 
   return (
     <AuthScreen>
       <Title > SpotiMaps </Title >
-      <form onSubmit={register} className='form'>
+      <form onSubmit={register} >
         <input
-          className='inputBar'
           type='email'
           value={userEmail}
           placeholder='email'
@@ -57,7 +58,6 @@ export default function SignUp() {
           disabled = {(loading) ? '' : 'disabled'} />
 
         <input
-          className='inputBar'
           type='password'
           value={userPassword}
           placeholder='senha'
@@ -65,15 +65,14 @@ export default function SignUp() {
           disabled = {(loading) ? '' : 'disabled'} />
 
         <input
-          className='inputBar'
           type='text'
           value={userName}
           placeholder='nome'
           onChange={e => setUserName(e.target.value)}
           disabled = {(loading) ? '' : 'disabled'} />
 
-        {(loading) ? <Button type="submit" className="button">Cadastrar</Button>
-          : <Button className="button"><ThreeDots color="#ffffff" height={40} width={40} /></Button>}
+        {(loading) ? <button type="submit" >Cadastrar</button>
+          : <button ><ThreeDots color="#ffffff" height={40} width={40} /></button>}
       </form>
       <Link to="/"><span className="link">Já tem uma conta? Faça login!</span></Link >
     </ AuthScreen>

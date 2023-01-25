@@ -1,14 +1,17 @@
-import { AiOutlinePlusCircle } from 'react-icons/ai';
-import { Link, Navigate } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link, useParams } from 'react-router-dom';
+
+import { BsCaretLeft } from 'react-icons/bs';
 
 import Body from '../../styles/playlistPage/Body';
 import DefaultScreen from '../../styles/playlistPage/DefaultScreen';
 import Header from '../../styles/playlistPage/Header';
 import PageTitle from '../../styles/playlistPage/PageTitle';
-import PlaylistComponent from './PlaylistComponent';
+import styled from 'styled-components';
+import MusicsComponent from './MusicComponent';
 
-export default function Playlists() {
+export default function Playlist() {
+  const params = useParams();
+
   const userPlaylists = [
     {
       id: 0,
@@ -56,27 +59,30 @@ export default function Playlists() {
   return (
     <DefaultScreen>
       <Header>
-        <PageTitle>Suas Playlists</PageTitle>
-        <Link to="/generate"> <AiOutlinePlusCircle color='#F0F7F4' fontSize='30px' /> </Link >
-        
+        <PageTitle>{userPlaylists[params.playlistId].name}</PageTitle>
+        <Link to="/playlists"> <BsCaretLeft color='#F0F7F4' fontSize='28px' /> </Link >
       </Header>
-      {(userPlaylists[0] === undefined) ? 
-        <Body >
-          <Message> No momento você ainda não tem playlists </Message >
-        </Body>
-        :
-        <Body>
-          {userPlaylists.map((playlist) => <PlaylistComponent playlist={playlist} key={playlist.id} /> )}
-        </Body>
-      }
-      
-    </DefaultScreen>
+
+      <Body>
+        <Musics>
+          {userPlaylists[params.playlistId].musics.map((musics) => <MusicsComponent musics={musics}/>)}
+        </Musics>
+      </Body>
+    </ DefaultScreen>
   );
 }
 
-const Message = styled.div`
-  margin-top: 40vh;
-  text-align: center;
-  font-size: 20px;
-  color: #F0F7F4;
+const Musics = styled.div`
+  width: calc(100vw - 40px);
+  max-width: 400px;
+  height: calc(100vh - 90px);
+  background-color: #F0F7F4;
+  margin: 0 -20px 20px -20px;
+  padding: 15px;
+
+  border: 1px solid #d5d5d5;
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: column;
 `;

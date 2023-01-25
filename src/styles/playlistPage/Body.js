@@ -4,10 +4,17 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
-  align-items: flex-start;
+  align-items: center;
 
   width: 80vw;
   height: 100vh;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+  }
 
   input {
     width: 300px;
@@ -41,6 +48,22 @@ const Body = styled.div`
     ::placeholder { /* Most modern browsers support this now. */
         color: #d5d5d5;
     }
+  }
+
+  button {
+    width: 300px;
+    height: 45px;
+    color: #F0F7F4;
+    background-color: #F5C6A2;
+    border: 0;
+    border-radius: 5px;
+    margin-bottom: 25px;
+
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
   }
 `;
 

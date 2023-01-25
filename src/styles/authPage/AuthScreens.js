@@ -12,7 +12,7 @@ const AuthScreen = styled.div`
   width: 100vw;
   background-color: #f7944d;
 
-  span{
+  span {
     color: #F0F7F4;
     cursor: pointer;
   }
@@ -54,6 +54,22 @@ const AuthScreen = styled.div`
     ::placeholder { /* Most modern browsers support this now. */
         color: #d5d5d5;
     }
+  }
+
+  button {
+    width: 300px;
+    height: 45px;
+    color: #F0F7F4;
+    background-color: #F5C6A2;
+    border: 0;
+    border-radius: 5px;
+    margin-bottom: 25px;
+
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
   }
 `;
 
