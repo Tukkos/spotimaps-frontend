@@ -2,20 +2,20 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner';
 
-import { signUp } from '../../services/authApi';
 import Title from '../../styles/authPage/Title';
 import AuthScreen from '../../styles/authPage/AuthScreens';
+import { signUp } from '../../services/authApi';
 
 export default function SignUp() {
   const [loading, setLoading] = useState(true);
 
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [userName, setUserName] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
   const navigate = useNavigate();
 
-  function register(e) {
+  async function register(e) {
     e.preventDefault();
 
     if (userEmail === '') {
@@ -24,25 +24,19 @@ export default function SignUp() {
     if (userPassword === '') {
       alert('Favor escolher uma senha.');
     }
-    if (userName === '') {
-      alert('Favor colocar como deseja ser chamado.');
+    if (userPassword != passwordConfirmation) {
+      alert('As senhas não são iguais.');
     } else {
       setLoading(false);
 
-      // const userInfo = {
-      //   email: userEmail,
-      //   name: userName,
-      //   password: userPassword
-      // };
-
-      // signUp(userInfo).then(() => {navigate('/', {});});
-      // signUp(userInfo).catch(() => {
-      //   alert('Falha ao fazer cadastro, favor rever seus dados.');
-      //   setLoading(true);
-      // });
-
-      console.log('Cadastro feito com sucesso!');
-      navigate('/', userEmail);
+      try {
+        await signUp({ userEmail, userPassword, passwordConfirmation });
+        setLoading(true);
+        alert('Inscrito com sucesso! Por favor, faça login.');
+      } catch (error) {
+        setLoading(true);
+        alert('Não foi possível fazer o cadastro!');
+      }
     }
   }
 
@@ -65,10 +59,10 @@ export default function SignUp() {
           disabled = {(loading) ? '' : 'disabled'} />
 
         <input
-          type='text'
-          value={userName}
-          placeholder='nome'
-          onChange={e => setUserName(e.target.value)}
+          type='password'
+          value={passwordConfirmation}
+          placeholder='confirme a senha'
+          onChange={e => setPasswordConfirmation(e.target.value)}
           disabled = {(loading) ? '' : 'disabled'} />
 
         {(loading) ? <button type="submit" >Cadastrar</button>
