@@ -1,10 +1,4 @@
 import axios from 'axios';
-// import api from './api';
-
-// export async function logIn( login ) {
-//   const response = await api.post('/auth/logIn', login);
-//   return response.data;
-// }
 
 async function signUp({ userEmail, userPassword, passwordConfirmation }) {
   const body = {
@@ -16,6 +10,16 @@ async function signUp({ userEmail, userPassword, passwordConfirmation }) {
   return response;
 }
 
+async function loginPost({ userEmail, userPassword }) {
+  const body = {
+    email: userEmail,
+    passwordHash: userPassword
+  };
+  const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}`+'/users/logIn', body);
+  return response;
+}
+
 export {
   signUp,
+  loginPost,
 };

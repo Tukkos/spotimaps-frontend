@@ -1,20 +1,24 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner';
 
-import { logIn } from '../../services/authApi';
-import Title from '../../styles/authPage/Title';
+import { loginPost } from '../../services/authApi';
 
+import LoginContext from '../../contexts/LoginContext';
+
+import Title from '../../styles/authPage/Title';
 import AuthScreen from '../../styles/authPage/AuthScreens';
 
-export default function Login({ setLoginInfos }) {
+export default function Login() {
+  const { setLoginInfos } = useContext(LoginContext);
+
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
 
-  function login(e) {
+  async function login(e) {
     e.preventDefault();
 
     if (userEmail === '') {
@@ -25,23 +29,16 @@ export default function Login({ setLoginInfos }) {
     } else {
       setLoading(false);
 
-      // const login = {
-      //   email: userEmail,
-      //   password: userPassword
-      // };
-
-      // logIn(login).then((res) => {
-      //   setLoginInfos([res.data]);
-      //   navigate('/generate', res.data);
-      // });
-
-      // logIn(login).catch(() => {
-      //   alert('Falha ao fazer login, favor tentar novamente.');
-      //   setLoading(true);
-      // });
-
-      console.log('Login realizado com sucesso');
-      navigate('/generate', userEmail);
+      try {
+        const userInfo = await loginPost({ userEmail, userPassword });
+        setLoginInfos(userInfo.data);
+        setLoading(true);
+        alert('Login feito com sucesso!');
+        navigate('/generate');
+      } catch (error) {
+        setLoading(true);
+        alert('Não foi possível fazer o login!');
+      }
     }
   }
 

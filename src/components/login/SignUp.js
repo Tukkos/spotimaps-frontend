@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner';
 
 import Title from '../../styles/authPage/Title';
@@ -12,8 +12,6 @@ export default function SignUp() {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
-
-  const navigate = useNavigate();
 
   async function register(e) {
     e.preventDefault();

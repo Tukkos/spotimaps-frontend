@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import LoginContext from '../contexts/LoginContext';
+import { LoginProvider } from '../contexts/LoginContext';
 
 import GlobalStyles from '../styles/GlobalStyles';
 import Login from './login/Login';
@@ -11,22 +10,20 @@ import Playlist from './playlist/Playlist';
 import Playlists from './playlist/Playlists';
 
 export default function App() {
-  const [loginInfos, setLoginInfos] = useState([]);
-
   return (
     <>
       <GlobalStyles />
       <>
         <BrowserRouter>
-          <LoginContext.Provider value={{ loginInfos }} >
+          <LoginProvider>
             <Routes>
-              <Route path="/" element={<Login  setLoginInfos={setLoginInfos} />} />
+              <Route path="/" element={<Login />} />
               <Route path="/signUp"  element={<SignUp />} />
               <Route path="/generate" element={<Generate /> }/>
               <Route path="/playlists" element={<Playlists />} />
               <Route path="/playlists/:playlistId" element={<Playlist />} />
             </Routes>
-          </LoginContext.Provider>
+          </LoginProvider>
         </BrowserRouter>
       </>
     </>

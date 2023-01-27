@@ -1,5 +1,6 @@
+import { useEffect, useState } from 'react';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Body from '../../styles/playlistPage/Body';
@@ -8,7 +9,27 @@ import Header from '../../styles/playlistPage/Header';
 import PageTitle from '../../styles/playlistPage/PageTitle';
 import PlaylistComponent from './PlaylistComponent';
 
+import { getPlaylists } from '../../services/playlistsApi';
+
+import useToken from '../../hooks/useToken';
+import useUserId from '../../hooks/useUserId';
+
 export default function Playlists() {
+  const token = useToken();
+  const userId = useUserId();
+  const [ playlists, setPlaylists ] = useState([]);
+  console.log(playlists);
+
+  useEffect(() => {
+    getPlaylists({ token, userId })
+      .then((res) => {
+        setPlaylists(res.data);
+      })
+      .catch(() => {
+        console.log('Error');
+      });
+  }, []);
+
   const userPlaylists = [
     {
       id: 0,
@@ -67,6 +88,7 @@ export default function Playlists() {
         :
         <Body>
           {userPlaylists.map((playlist) => <PlaylistComponent playlist={playlist} key={playlist.id} /> )}
+          {playlists.map((playlist) => <PlaylistComponent playlist={playlist} key={playlist.id} /> )}
         </Body>
       }
       
