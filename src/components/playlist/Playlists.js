@@ -18,7 +18,6 @@ export default function Playlists() {
   const token = useToken();
   const userId = useUserId();
   const [ playlists, setPlaylists ] = useState([]);
-  console.log(playlists);
 
   useEffect(() => {
     getPlaylists({ token, userId })

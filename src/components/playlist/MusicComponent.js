@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export default function MusicsComponent({ musics }) {
   return (
     <MusicLine>
-      <div>{musics.name}</div>
-      <div>{musics.duration}</div>
+      <div>{musics.musics.name}</div>
+      <div>{musics.musics.duration}</div>
     </MusicLine>
   );
 }

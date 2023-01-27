@@ -10,7 +10,7 @@ export default function PlaylistComponent({ playlist }) {
 
   return (
     <Reference>
-      <Link to={`/playlists/${playlist.id}`}>
+      <Link to={`/playlists/${playlist.id}`} >
         <Playlist >
         
           <img src={playlist.image} />

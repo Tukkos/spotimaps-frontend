@@ -8,64 +8,37 @@ import Header from '../../styles/playlistPage/Header';
 import PageTitle from '../../styles/playlistPage/PageTitle';
 import styled from 'styled-components';
 import MusicsComponent from './MusicComponent';
+import { useEffect, useState } from 'react';
+import { getPlaylistsMusics } from '../../services/playlistsApi';
+import useToken from '../../hooks/useToken';
+import EditableInput from './PlaylistTitle';
 
 export default function Playlist() {
+  const token = useToken();
   const params = useParams();
+  const playlistId = params.playlistId;
+  const [ playlistMusics, setPlaylistsMusics ] = useState([]);
 
-  const userPlaylists = [
-    {
-      id: 0,
-      name: 'Beyonce',
-      image: 'https://www.tenhomaisdiscosqueamigos.com/wp-content/uploads/2022/07/beyonce-renaissance-foto.jpg',
-      duration: '00:30',
-      musics: [
-        {
-          id: 0,
-          name: 'Energy',
-          duration: '1:56'
-        },
-        {
-          id: 1,
-          name: 'Cozy',
-          duration: '3:30'
-        },
-        {
-          id: 2,
-          name: 'Break my Soul',
-          duration: '4:38'
-        }
-      ]
-    },
-    {
-      id: 1,
-      name: 'Billie Eilish',
-      image: 'https://upload.wikimedia.org/wikipedia/en/2/26/Billie_Eilish_-_Guitar_Songs.png',
-      duration: '00:08',
-      musics: [
-        {
-          id: 0,
-          name: 'TV',
-          duration: '4:42'
-        },
-        {
-          id: 1,
-          name: 'The 30th',
-          duration: '3:37'
-        }
-      ]
-    }
-  ];
+  useEffect(() => {
+    getPlaylistsMusics({ token, playlistId })
+      .then((res) => {
+        setPlaylistsMusics(res.data);
+      })
+      .catch(() => {
+        console.log('Error');
+      });
+  }, []);
 
   return (
     <DefaultScreen>
       <Header>
-        <PageTitle>{userPlaylists[params.playlistId].name}</PageTitle>
+        { playlistMusics.name != undefined ? <EditableInput text={playlistMusics?.name} playlistId={playlistId} /> : null }
         <Link to="/playlists"> <BsCaretLeft color='#F0F7F4' fontSize='28px' /> </Link >
       </Header>
 
       <Body>
         <Musics>
-          {userPlaylists[params.playlistId].musics.map((musics) => <MusicsComponent musics={musics}/>)}
+          {playlistMusics.musicsPlaylists?.map((musics) => <MusicsComponent musics={musics}/>)}
         </Musics>
       </Body>
     </ DefaultScreen>
