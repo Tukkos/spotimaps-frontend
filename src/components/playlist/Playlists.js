@@ -39,17 +39,17 @@ export default function Playlists() {
         {
           id: 0,
           name: 'Energy',
-          duration: '1:56'
+          duration: 116000
         },
         {
           id: 1,
           name: 'Cozy',
-          duration: '3:30'
+          duration: 210000
         },
         {
           id: 2,
           name: 'Break my Soul',
-          duration: '4:38'
+          duration: 278000
         }
       ]
     },
@@ -62,12 +62,12 @@ export default function Playlists() {
         {
           id: 0,
           name: 'TV',
-          duration: '4:42'
+          duration: 282000
         },
         {
           id: 1,
           name: 'The 30th',
-          duration: '3:37'
+          duration: 217000
         }
       ]
     }

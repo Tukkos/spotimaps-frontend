@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
+
 import useToken from '../../hooks/useToken';
+
 import { putPlaylistName } from '../../services/playlistsApi';
+
 import PageTitle from '../../styles/playlistPage/PageTitle';
 
 const EditableInput = props => {

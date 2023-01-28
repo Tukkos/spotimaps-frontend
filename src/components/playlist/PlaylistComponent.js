@@ -1,9 +1,12 @@
 import styled from 'styled-components';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { FaRegTrashAlt } from 'react-icons/fa';
+import msToHoursAndMinutes from '../../utils/msToHr';
 
 export default function PlaylistComponent({ playlist }) {
+  const playlistDuration = msToHoursAndMinutes(playlist.duration);
+
   function deletePlaylist() {
     console.log(`Playlist ${playlist.id} deletada`);
   };
@@ -17,7 +20,7 @@ export default function PlaylistComponent({ playlist }) {
 
           <div>
             <PlaylistTitle> Playlist: {playlist.name} </PlaylistTitle>
-            <PlaylistDuration> {playlist.duration} min</PlaylistDuration>
+            <PlaylistDuration> {playlistDuration} h</PlaylistDuration>
           </div>
 
         </Playlist>

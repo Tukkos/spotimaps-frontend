@@ -1,10 +1,13 @@
 import styled from 'styled-components';
+import msToMinutesAndSeconds from '../../utils/msToMin';
 
 export default function MusicsComponent({ musics }) {
+  const musicDuration = msToMinutesAndSeconds(musics.musics.duration);
+
   return (
     <MusicLine>
       <div>{musics.musics.name}</div>
-      <div>{musics.musics.duration}</div>
+      <div>{musicDuration} min</div>
     </MusicLine>
   );
 }

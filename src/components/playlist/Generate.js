@@ -15,6 +15,38 @@ export default function Generate() {
 
   const [duration, setDuration] = useState('');
   const [band, setBand] = useState('');
+  
+  const musics = [
+    {
+      id: 0,
+      name: 'Energy',
+      duration: 116000
+    },
+    {
+      id: 1,
+      name: 'Cozy',
+      duration: 210000
+    },
+    {
+      id: 2,
+      name: 'Break my Soul',
+      duration: 278000
+    },
+    {
+      id: 3,
+      name: 'TV',
+      duration: 282000
+    },
+    {
+      id: 4,
+      name: 'The 30th',
+      duration: 217000
+    }
+  ];
+
+  function randomizeMusics() {
+    return 0.5 - Math.random();
+  };
 
   function makePlaylist(e) {
     e.preventDefault();
@@ -26,8 +58,26 @@ export default function Generate() {
       alert('Favor colocar o nome de uma banda.');
     } else {
       setLoading(false);
+      let msDuration = duration * 60000;
+
+      const playlistMusics = [];
+      const randomizedMusics = musics.sort(randomizeMusics);
+      let i = 0;
+
+      while (msDuration > 0) {
+        // console.log(randomizedMusics[i]);
+        // console.log(randomizedMusics[i].duration);
+        // console.log(msDuration);
+        // console.log(i);
+        playlistMusics.push(randomizedMusics[i]);
+        i++;
+        msDuration = msDuration - randomizedMusics[i].duration;
+        console.log(playlistMusics);
+      }
+
       console.log('Playlist criada');
-      navigate('/playlists');
+      setLoading(true);
+      // navigate('/playlists');
     }
   };
 

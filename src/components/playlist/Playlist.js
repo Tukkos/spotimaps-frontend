@@ -1,16 +1,17 @@
 import { Link, useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 
 import { BsCaretLeft } from 'react-icons/bs';
+
+import useToken from '../../hooks/useToken';
+import { getPlaylistsMusics } from '../../services/playlistsApi';
 
 import Body from '../../styles/playlistPage/Body';
 import DefaultScreen from '../../styles/playlistPage/DefaultScreen';
 import Header from '../../styles/playlistPage/Header';
-import PageTitle from '../../styles/playlistPage/PageTitle';
-import styled from 'styled-components';
+
 import MusicsComponent from './MusicComponent';
-import { useEffect, useState } from 'react';
-import { getPlaylistsMusics } from '../../services/playlistsApi';
-import useToken from '../../hooks/useToken';
 import EditableInput from './PlaylistTitle';
 
 export default function Playlist() {
