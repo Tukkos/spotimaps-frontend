@@ -13,12 +13,12 @@ const EditableInput = props => {
   const [inputVisible, setInputVisible] = useState(false);
   const [text, setText] = useState(props.text);
 
-  function onClickOutSide(e) {
+  async function onClickOutSide(e) {
     if (inputRef.current && !inputRef.current.contains(e.target)) {
       const body = {
         name: text,
       };
-      putPlaylistName({ token, playlistId, body });
+      await putPlaylistName({ token, playlistId, body });
       setInputVisible(false);
     }
   }

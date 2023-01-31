@@ -8,8 +8,11 @@ import DefaultScreen from '../../styles/playlistPage/DefaultScreen';
 import Body from '../../styles/playlistPage/Body';
 import Header from '../../styles/playlistPage/Header';
 import PageTitle from '../../styles/playlistPage/PageTitle';
+import { createMusic, createMusicsPlaylist, createPlaylist } from '../../services/playlistsApi';
+import useToken from '../../hooks/useToken';
 
 export default function Generate() {
+  const token = useToken();
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -48,7 +51,7 @@ export default function Generate() {
     return 0.5 - Math.random();
   };
 
-  function makePlaylist(e) {
+  async function makePlaylist(e) {
     e.preventDefault();
 
     if (duration === '') {
@@ -68,14 +71,52 @@ export default function Generate() {
         playlistMusics.push(randomizedMusics[i]);
         i++;
         msDuration = msDuration - randomizedMusics[i].duration;
-        console.log(playlistMusics);
       }
 
-      console.log('Playlist criada');
+      const playlist = await axiosCreatePlaylist();
+      const playlistId = playlist.data.id;
+
+      playlistMusics.map(async(musicArray) => {
+        await axiosCreateMusics({ playlistId, musicArray });
+      });
       setLoading(true);
-      // navigate('/playlists');
+      navigate('/playlists');
     }
   };
+
+  async function axiosCreatePlaylist() {
+    const playlistDuration = duration * 60000;
+    const body = {
+      bandName: band,
+      duration: playlistDuration,
+      image: 'https://m.media-amazon.com/images/I/81xT1axhZ2L._AC_SL1500_.jpg',
+    };
+
+    const playlist = await createPlaylist({ token, body });
+    return playlist;
+  };
+
+  async function axiosCreateMusics({ playlistId, musicArray }) {
+    const body = {
+      name: musicArray.name,
+      duration: musicArray.duration,
+    };
+
+    const music = await createMusic({ token, body });
+    const musicId = music.data.id;
+    console.log(playlistId);
+    await axiosCreateMusicPlaylists({ playlistId, musicId });
+  };
+
+  async function axiosCreateMusicPlaylists({ playlistId, musicId }) {
+    const body = {
+      musicsId: musicId,
+      playlistId: playlistId
+    };
+    console.log(body);
+
+    await createMusicsPlaylist({ token, body });
+  }
 
   return (
     <DefaultScreen>

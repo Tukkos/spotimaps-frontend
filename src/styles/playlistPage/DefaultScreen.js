@@ -3,8 +3,9 @@ import styled from 'styled-components';
 const DefaultScreen = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
+  overflow: auto;
 
   min-height: 667px;
   height: 100vh;

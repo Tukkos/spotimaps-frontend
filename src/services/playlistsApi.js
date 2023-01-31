@@ -27,17 +27,47 @@ async function putPlaylistName({ token, playlistId, body }) {
   return response;
 }
 
+async function createPlaylist({ token, body }) {
+  const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}`+'/playlists', body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+}
+
+async function createMusic({ token, body }) {
+  const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}`+'/playlists/music', body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+}
+
+async function createMusicsPlaylist({ token, body }) {
+  const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}`+'/playlists/musicsPlaylist', body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+}
+
 async function deletePlaylistAndMusics({ token, playlistId }) {
   await axios.delete(`${process.env.REACT_APP_API_BASE_URL}`+`/playlists/${playlistId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
-};
+}
 
 export {
   getPlaylists,
   getPlaylistsMusics,
   putPlaylistName,
+  createPlaylist,
+  createMusic,
+  createMusicsPlaylist,
   deletePlaylistAndMusics,
 };

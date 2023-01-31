@@ -11,9 +11,9 @@ export default function PlaylistComponent({ playlist }) {
   const token = useToken();
   const playlistDuration = msToHoursAndMinutes(playlist.duration);
 
-  function deletePlaylist() {
+  async function deletePlaylist() {
     const playlistId = playlist.id;
-    deletePlaylistAndMusics({ token, playlistId });
+    await deletePlaylistAndMusics({ token, playlistId });
     window.location.reload();
   };
 
