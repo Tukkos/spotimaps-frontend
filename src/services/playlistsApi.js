@@ -27,8 +27,17 @@ async function putPlaylistName({ token, playlistId, body }) {
   return response;
 }
 
+async function deletePlaylistAndMusics({ token, playlistId }) {
+  await axios.delete(`${process.env.REACT_APP_API_BASE_URL}`+`/playlists/${playlistId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 export {
   getPlaylists,
   getPlaylistsMusics,
   putPlaylistName,
+  deletePlaylistAndMusics,
 };

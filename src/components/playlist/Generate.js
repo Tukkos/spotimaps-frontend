@@ -65,10 +65,6 @@ export default function Generate() {
       let i = 0;
 
       while (msDuration > 0) {
-        // console.log(randomizedMusics[i]);
-        // console.log(randomizedMusics[i].duration);
-        // console.log(msDuration);
-        // console.log(i);
         playlistMusics.push(randomizedMusics[i]);
         i++;
         msDuration = msDuration - randomizedMusics[i].duration;

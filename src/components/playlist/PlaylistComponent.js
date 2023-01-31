@@ -1,14 +1,20 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import useToken from '../../hooks/useToken';
+
 import { FaRegTrashAlt } from 'react-icons/fa';
 import msToHoursAndMinutes from '../../utils/msToHr';
+import { deletePlaylistAndMusics } from '../../services/playlistsApi';
 
 export default function PlaylistComponent({ playlist }) {
+  const token = useToken();
   const playlistDuration = msToHoursAndMinutes(playlist.duration);
 
   function deletePlaylist() {
-    console.log(`Playlist ${playlist.id} deletada`);
+    const playlistId = playlist.id;
+    deletePlaylistAndMusics({ token, playlistId });
+    window.location.reload();
   };
 
   return (
