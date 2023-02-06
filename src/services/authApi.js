@@ -6,7 +6,7 @@ async function signUp({ userEmail, userPassword, passwordConfirmation }) {
     password: userPassword,
     confirmPassword: passwordConfirmation
   };
-  const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}`+'/users', body);
+  const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}`+'users', body);
   return response;
 }
 
@@ -15,7 +15,7 @@ async function loginPost({ userEmail, userPassword }) {
     email: userEmail,
     passwordHash: userPassword
   };
-  const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}`+'/users/logIn', body);
+  const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}`+'users/logIn', body);
   return response;
 }
 

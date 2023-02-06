@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 async function getPlaylists({ token }) {
-  const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}`+'/playlists', {
+  const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}`+'playlists', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -10,7 +10,7 @@ async function getPlaylists({ token }) {
 }
 
 async function getPlaylistsMusics({ token, playlistId }) {
-  const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}`+`/playlists/${playlistId}`, {
+  const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}`+`playlists/${playlistId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -19,7 +19,7 @@ async function getPlaylistsMusics({ token, playlistId }) {
 }
 
 async function putPlaylistName({ token, playlistId, body }) {
-  const response = await axios.put(`${process.env.REACT_APP_API_BASE_URL}`+`/playlists/name/${playlistId}`, body, {
+  const response = await axios.put(`${process.env.REACT_APP_API_BASE_URL}`+`playlists/name/${playlistId}`, body, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -28,7 +28,7 @@ async function putPlaylistName({ token, playlistId, body }) {
 }
 
 async function createPlaylist({ token, body }) {
-  const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}`+'/playlists', body, {
+  const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}`+'playlists', body, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -37,7 +37,7 @@ async function createPlaylist({ token, body }) {
 }
 
 async function createMusic({ token, body }) {
-  const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}`+'/playlists/music', body, {
+  const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}`+'playlists/music', body, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -46,7 +46,7 @@ async function createMusic({ token, body }) {
 }
 
 async function createMusicsPlaylist({ token, body }) {
-  const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}`+'/playlists/musicsPlaylist', body, {
+  const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}`+'playlists/musicsPlaylist', body, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -55,7 +55,7 @@ async function createMusicsPlaylist({ token, body }) {
 }
 
 async function deletePlaylistAndMusics({ token, playlistId }) {
-  await axios.delete(`${process.env.REACT_APP_API_BASE_URL}`+`/playlists/${playlistId}`, {
+  await axios.delete(`${process.env.REACT_APP_API_BASE_URL}`+`playlists/${playlistId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
